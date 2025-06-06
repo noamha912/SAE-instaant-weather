@@ -1,6 +1,3 @@
-/**
- * Classe WeatherCard pour créer et gérer les cartes météorologiques
- */
 class WeatherCard {
     constructor(weatherData, options = {}) {
         this.data = weatherData;
@@ -9,37 +6,37 @@ class WeatherCard {
     }
 
     /**
-     * Obtient l'icône météo appropriée basée sur le code météo
-     * @param {number} weatherCode - Code météo de l'API
-     * @returns {string} - Classe d'icône Font Awesome
+     * icones météo
+     * @param {number} weatherCode
+     * @returns {string}
      */
     getWeatherIcon(weatherCode) {
         const iconMap = {
-            0: 'fas fa-sun', // Soleil
-            1: 'fas fa-cloud-sun', // Peu nuageux
-            2: 'fas fa-cloud', // Nuageux
-            3: 'fas fa-cloud', // Très nuageux
-            4: 'fas fa-smog', // Brouillard
-            5: 'fas fa-cloud-rain', // Pluie légère
-            6: 'fas fa-cloud-rain', // Pluie modérée
-            7: 'fas fa-cloud-showers-heavy', // Pluie forte
-            8: 'fas fa-snowflake', // Neige légère
-            9: 'fas fa-snowflake', // Neige modérée
-            10: 'fas fa-snowflake', // Neige forte
-            11: 'fas fa-bolt', // Orage
-            12: 'fas fa-bolt', // Orage violent
-            13: 'fas fa-cloud-rain', // Averses
-            14: 'fas fa-cloud-rain', // Averses orageuses
-            15: 'fas fa-wind' // Vent fort
+            0: 'fas fa-sun',
+            1: 'fas fa-cloud-sun',
+            2: 'fas fa-cloud',
+            3: 'fas fa-cloud',
+            4: 'fas fa-smog',
+            5: 'fas fa-cloud-rain',
+            6: 'fas fa-cloud-rain',
+            7: 'fas fa-cloud-showers-heavy',
+            8: 'fas fa-snowflake',
+            9: 'fas fa-snowflake',
+            10: 'fas fa-snowflake',
+            11: 'fas fa-bolt',
+            12: 'fas fa-bolt',
+            13: 'fas fa-cloud-rain',
+            14: 'fas fa-cloud-rain',
+            15: 'fas fa-wind'
         };
         
         return iconMap[weatherCode] || 'fas fa-question';
     }
 
     /**
-     * Formate la date en français
-     * @param {string} dateString - Date au format ISO
-     * @returns {string} - Date formatée
+     * datebon format
+     * @param {string} dateString
+     * @returns {string}
      */
     formatDate(dateString) {
         const date = new Date(dateString);
@@ -53,9 +50,9 @@ class WeatherCard {
     }
 
     /**
-     * Obtient la description météo en français
-     * @param {number} weatherCode - Code météo
-     * @returns {string} - Description météo
+     * description météo
+     * @param {number} weatherCode
+     * @returns {string}
      */
     getWeatherDescription(weatherCode) {
         const descriptions = {
@@ -81,9 +78,9 @@ class WeatherCard {
     }
 
     /**
-     * Convertit la direction du vent en cardinal
-     * @param {number} degrees - Direction en degrés
-     * @returns {string} - Direction cardinale
+     * direction du vent
+     * @param {number} degrees
+     * @returns {string}
      */
     getWindDirection(degrees) {
         const directions = [
@@ -98,8 +95,8 @@ class WeatherCard {
     }
 
     /**
-     * Crée les détails optionnels de la carte
-     * @returns {string} - HTML des détails optionnels
+     * détail carte
+     * @returns {string}
      */
     createOptionalDetails() {
         let detailsHTML = '';
@@ -173,8 +170,8 @@ class WeatherCard {
     }
 
     /**
-     * Crée les détails de base de la carte météo
-     * @returns {string} - HTML des détails de base
+     * détail de base carte
+     * @returns {string}
      */
     createBaseDetails() {
         return `
@@ -192,8 +189,8 @@ class WeatherCard {
     }
 
     /**
-     * Génère le HTML complet de la carte météo
-     * @returns {string} - HTML de la carte météo
+     * le html de la carte
+     * @returns {string}
      */
     render() {
         const weatherIcon = this.getWeatherIcon(this.data.weather);
@@ -231,7 +228,7 @@ class WeatherCard {
 
     /**
      * Crée et insère la carte dans le DOM
-     * @param {HTMLElement} container - Conteneur où insérer la carte
+     * @param {HTMLElement} container
      */
     appendTo(container) {
         const cardHTML = this.render();
@@ -250,19 +247,16 @@ class WeatherCard {
 
     /**
      * Méthode statique pour rendre plusieurs cartes dans un conteneur
-     * @param {Array} weatherDataArray - Tableau de données météo
-     * @param {HTMLElement} container - Conteneur DOM
-     * @param {Object} options - Options pour les cartes
+     * @param {Array} weatherDataArray
+     * @param {HTMLElement} container
+     * @param {Object} options
      */
     static renderMultiple(weatherDataArray, container, options = {}) {
-        // Vider le conteneur
         container.innerHTML = '';
         
-        // Créer et ajouter chaque carte
         weatherDataArray.forEach((data, index) => {
             const card = new WeatherCard(data, options);
             
-            // Ajouter un délai d'animation pour chaque carte
             setTimeout(() => {
                 card.appendTo(container);
             }, index * 100);
@@ -271,8 +265,8 @@ class WeatherCard {
 
     /**
      * Compare deux cartes météo (pour la fonctionnalité de comparaison)
-     * @param {WeatherCard} otherCard - Autre carte à comparer
-     * @returns {Object} - Objet de comparaison
+     * @param {WeatherCard} otherCard
+     * @returns {Object}
      */
     compareTo(otherCard) {
         return {
@@ -286,17 +280,7 @@ class WeatherCard {
             date2: otherCard.data.datetime
         };
     }
-
-    /**
-     * Crée une carte de comparaison
-     * @param {WeatherCard} otherCard - Autre carte à comparer
-     * @param {string} city1Name - Nom de la première ville
-     * @param {string} city2Name - Nom de la deuxième ville
-     * @returns {string} - HTML de la carte de comparaison
-     */
-    createComparisonCard(otherCard, city1Name, city2Name) {
-        const comparison = this.compareTo(otherCard);
-        
+}  
         return `
             <div class="comparison-card">
                 <h4 class="comparison-card-title">
