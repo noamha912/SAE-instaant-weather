@@ -262,22 +262,4 @@ class WeatherCard {
             }, index * 100);
         });
     }
-
-    /**
-     * Compare deux cartes météo (pour la fonctionnalité de comparaison)
-     * @param {WeatherCard} otherCard
-     * @returns {Object}
-     */
-    compareTo(otherCard) {
-        return {
-            temperatureDiff: {
-                max: this.data.tmax - otherCard.data.tmax,
-                min: this.data.tmin - otherCard.data.tmin
-            },
-            rainProbabilityDiff: (this.data.probarain || 0) - (otherCard.data.probarain || 0),
-            sunHoursDiff: (this.data.sun_hours || 0) - (otherCard.data.sun_hours || 0),
-            date1: this.data.datetime,
-            date2: otherCard.data.datetime
-        };
-    }
 }
