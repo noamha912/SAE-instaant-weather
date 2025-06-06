@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Weather V2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <h1 class="title">
+                <i class="fas fa-cloud-sun"></i>
+                Instant Weather
+            </h1>
+            <p class="subtitle">Previsión del tiempo del grande Noa </p>
+            <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Activer/désactiver le mode sombre">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="search-section">
+            <div class="form-container">
+                <div class="days-selector-necklace">
+                    <div class="days-buttons">
+                        <button class="day-button active" data-days="1" aria-label="Prévisions pour 1 jour">1</button>
+                        <button class="day-button" data-days="2" aria-label="Prévisions pour 2 jours">2</button>
+                        <button class="day-button" data-days="3" aria-label="Prévisions pour 3 jours">3</button>
+                        <button class="day-button" data-days="4" aria-label="Prévisions pour 4 jours">4</button>
+                        <button class="day-button" data-days="5" aria-label="Prévisions pour 5 jours">5</button>
+                        <button class="day-button" data-days="6" aria-label="Prévisions pour 6 jours">6</button>
+                        <button class="day-button" data-days="7" aria-label="Prévisions pour 7 jours">7</button>
+                    </div>
+                </div>
+                <form id="weatherForm" class="weather-form">
+                    <div class="input-group">
+                        <label for="postalCode" class="label">Code postal</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-map-marker-alt input-icon"></i>
+                            <input type="text" id="postalCode" class="input" placeholder="Entrez un code postal" required pattern="[0-9]{5}">
+                        </div>
+                    </div>
+
+                    <div class="input-group" id="cityGroup" style="display: none;">
+                        <label for="citySelect" class="label">Commune</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-city input-icon"></i>
+                            <select id="citySelect" class="select" required>
+                                <option value="">Sélectionnez une commune</option>
+                            </select>
+                        </div>
+                        <p id="cityFeedback" class="city-feedback" style="display: none;"></p>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="label">Nombre de jours de prévisions</label>
+                        <div class="days-selector">
+                            <span id="daysValue" class="days-display">1 jour(s)</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <button type="submit" id="submitBtn" class="submit-btn" disabled>
+                            <i class="fas fa-search"></i>
+                            Obtenir les prévisions
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="loading" id="loading" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>Chargement des données météorologiques...</p>
+        </section>
+
+        <section class="error-message" id="errorMessage" style="display: none;">
+            <i class="fas fa-exclamation-circle"></i>
+            <p id="errorText"></p>
+        </section>
+
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <h2 class="section-title">Prévisions météorologiques</h2>
+            <div class="weather-cards-container" id="weatherCards"></div>
+        </section>
+    </main>
+
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>Instant Weather V2 - Mahier--Allili Noa = tanwiruha</p>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Remonte</a>
+                <a href="#" class="footer-link">L'ascenseur</a>
+                <a href="#" class="footer-link">Toujours en haut</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="apiService.js"></script>
+    <script src="weatherCard.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
